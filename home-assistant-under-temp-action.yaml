@@ -1,0 +1,15 @@
+alias: Wood Boiler under temperature
+description: Notify when the outdoor wood boiler temperature is low
+trigger:
+  - type: temperature
+    platform: device
+    device_id: 52a4c17e9d4d1264f755011ad3100c2a
+    entity_id: sensor.wood_boiler_temperature_2
+    domain: sensor
+    below: 145
+condition: []
+action:
+  - service: notify.notify
+    data:
+      message: Check the outdoor wood boiler for wood
+mode: single

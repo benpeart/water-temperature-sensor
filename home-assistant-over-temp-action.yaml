@@ -1,0 +1,15 @@
+alias: Wood Boiler over temperature
+description: Send a notification when the wood boiler is at risk of boiling over
+trigger:
+  - type: temperature
+    platform: device
+    device_id: 52a4c17e9d4d1264f755011ad3100c2a
+    entity_id: sensor.wood_boiler_temperature_2
+    domain: sensor
+    above: 185
+condition: []
+action:
+  - service: notify.notify
+    data:
+      message: The outdoor wood boiler is over temperature
+mode: single
