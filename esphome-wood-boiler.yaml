@@ -1,7 +1,7 @@
 esphome:
   name: wood-boiler
   platform: ESP8266
-  board: d1_mini
+  board: d1_mini  
 
 wifi:
   ssid: !secret wifi_ssid
@@ -32,4 +32,18 @@ sensor:
   - platform: max31855
     name: "Wood Boiler Temperature"
     cs_pin: D8
-    update_interval: 60s
+    update_interval: 30s
+
+    # Optional variables:
+    unit_of_measurement: "°C"
+    icon: "mdi:water-boiler"
+    device_class: "temperature"
+    state_class: "measurement"
+    accuracy_decimals: 1
+
+    # The sensor is noisy so filter outliers from the received sensor data
+    filters:
+      - median:
+          window_size: 7
+          send_every: 4
+          send_first_at: 3
