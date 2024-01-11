@@ -44,6 +44,6 @@ sensor:
     # The sensor is noisy so filter outliers from the received sensor data
     filters:
       - median:
-          window_size: 7
-          send_every: 4
-          send_first_at: 3
+          window_size: 11
+          send_every: 6
+          send_first_at: 5

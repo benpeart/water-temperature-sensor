@@ -2,7 +2,8 @@
 
 This is a relatively simple IOT sensor I put together to monitor the temperature of the water
 coming from my outdoor wood boiler. The temperature probe monitors the temperature every 60
-seconds and sends it to my Home Assistant server via ESPHome (or MQTT). 
+seconds and sends it to my Home Assistant server via ESPHome (or MQTT). I run ESPHome in a docker
+on the same server running Home Assistant. See the enclosed docker-compose.yml.
 
 ## Home Assistant
 
@@ -10,6 +11,12 @@ Home Assistant has actions that notify me when the water exceeds 185 degrees and
 of boiling over. This typically means I have left a door open and the fire is raging! I have
 a second action when the water temperature goes under 145 which typically means I need to load
 more firewood.
+
+I found that the MAX31855 and K-Type temperature sensor resulted in noisy readings so have utilized
+the median sliding window filter to filter out the outlier values. I observed very low readings for
+periods up to 10 mintues. Since the temperature of the wood boiler doesn't change that quickly, I use
+a fairly large window to ensure I remove the outliers and don't have false over/under temperature
+notifications. My current settings are in esphome-wood-boiler.yaml. 
 
 ## Wiring Diagram
 
